@@ -240,6 +240,7 @@ taxonomy:
 | MyAvatar.useAdvancedMovementControls     |
 | MyAvatar.useFullAvatarURL(QUrl)          |
 | MyAvatar.useFullAvatarURL(QUrl,QString)  |
+| [MyAvatar.worldToJointPoint(glm::vec3,int)](#m33) |
 
 | Events                                   |
 | ---------------------------------------- |
@@ -1954,4 +1955,28 @@ For example if you wanted to raise the model off the ground slightly, you could 
 
 ```
 MyAvatar.setSkeletonOffset({x: 0, y: 0.1: z: 0});
+```
+
+
+
+## worldToJointPoint()<a id="m48"></a>
+
+Usually Joint positions are returned in world coordinates but with this function you can convert it to coordinates that are local to the specified position.
+
+### Function
+
+`worldToJointPoint(avatarPostion,jointIndex)`
+
+### Arguments
+
+**avatarPostion:vec3**: The position to get the joints postion relative to.
+
+**jointIndex:int**: The index of the joint whose position will be set. The joint index of a specific joint is its position in the array returned by [getJointNames()](https://wiki.highfidelity.com/wiki/GetJointNames\(\)). When looping over joints in a for loop, using the jointIndex is slightly faster than looking the joint up by name.
+
+### Examples
+
+For example if you wanted the position of your `LeftFoot` relative to your avatar you could use:
+
+```
+MyAvatar.worldToJointPoint(MyAvatar.position,MyAvatar.getJointIndex("LeftFoot"));
 ```
